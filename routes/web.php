@@ -17,17 +17,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// show Home Page
 Route::get('/', [FrontendController::class, 'index'])->name('home');
+
+// Show Product Details Pagge
 Route::get('product/{slug}', [FrontendController::class, 'showProduct'])->name('product.show');
+
+// Show Product modal
+Route::get('/load-product-modal/{productId}', [FrontendController::class, 'loadProductModal'])->name('load.Product.Modal');
 
 Route::middleware('auth')->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::put('profile', [ProfileController::class, 'updateProfile'])->name('profile.update');
     Route::put('profile/password', [ProfileController::class, 'updatePassword'])->name('profile.password.update');
     Route::post('profile/avatar', [ProfileController::class, 'updateAvatar'])->name('profile.avatar.update');
-    // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 require __DIR__.'/auth.php';

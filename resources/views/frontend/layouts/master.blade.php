@@ -119,6 +119,23 @@
         });
     </script>
 
+    {{-- Load Product Modal --}}
+    <script>
+        function loadProductModal(productId){
+            //console.log($productId);
+            $.ajax({
+                method: 'GET',
+                url: '{{ route("load.Product.Modal", ":productId")}}'.replace(':productId', productId), //first:productId is just a placeholder, the .replace will replace this with the real parameter coming from function
+                success: function(response){
+                    $(".load_product_modal_body").html(response);
+                    $('#cartModal').modal('show');
+                },
+                error: function(xhr, status, error){
+                    console.error(error);
+                }
+            })
+        }
+    </script>
     @stack('scripts')
 </body>
 
